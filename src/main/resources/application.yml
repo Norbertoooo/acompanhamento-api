@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: acompanhamento-api
+  profiles:
+    active: dev
+
+server:
+  port: 8081

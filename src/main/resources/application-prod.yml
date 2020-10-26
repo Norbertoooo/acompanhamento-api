@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    username: rafa
+    password: rafa
+    driver-class-name: org.postgresql.Driver
+    platform: org.hibernate.dialect.PostgreSQLDialect
