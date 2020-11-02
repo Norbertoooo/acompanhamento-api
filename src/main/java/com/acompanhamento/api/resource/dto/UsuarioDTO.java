@@ -1,6 +1,5 @@
 package com.acompanhamento.api.resource.dto;
 
-import com.acompanhamento.api.domain.Papel;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -15,7 +14,5 @@ public class UsuarioDTO {
     @NotBlank
     @Length(min = 6)
     private String senha;
-    private Papel papel;
-    private String token;
 
 }
