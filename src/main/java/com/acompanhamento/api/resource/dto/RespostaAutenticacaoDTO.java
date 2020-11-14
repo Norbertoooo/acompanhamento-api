@@ -1,15 +1,17 @@
 package com.acompanhamento.api.resource.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@Getter
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class RespostaAutenticacaoDTO implements Serializable {
 
-    private static final long serialVersionUID = -8091879091924046844L;
+    private static final long serialVersionUID = 1L;
 
-    private final String jwttoken;
+    private String jwttoken;
 }

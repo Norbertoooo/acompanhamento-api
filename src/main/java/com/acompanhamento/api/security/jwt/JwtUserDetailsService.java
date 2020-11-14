@@ -37,10 +37,10 @@ public class JwtUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> perfilTerapeuta = AuthorityUtils.createAuthorityList(Perfil.TERAPEUTA.name());
 
         if (usuario.get().getPerfil().equals(Perfil.ADMINISTRADOR)) {
-            return new User(usuario.get().getEmail(), usuario.get().getEmail(), perfilAdmin);
+            return new User(usuario.get().getEmail(), usuario.get().getSenha(), perfilAdmin);
         }
         if (usuario.get().getPerfil().equals(Perfil.RESPONSAVEL)) {
-            return new User(usuario.get().getEmail(), usuario.get().getEmail(), perfilResponsavel);
+            return new User(usuario.get().getEmail(), usuario.get().getSenha(), perfilResponsavel);
         }
         return new User(usuario.get().getEmail(), usuario.get().getSenha(), perfilTerapeuta);
     }
