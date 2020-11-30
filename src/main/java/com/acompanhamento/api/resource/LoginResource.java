@@ -43,8 +43,8 @@ public class LoginResource {
         return ResponseEntity.ok(new RespostaAutenticacaoDTO(token));
     }
 
-    @PostMapping("/registrar")
-    public ResponseEntity<?> registrarNovoUsuario(@RequestBody Usuario usuario) {
+    @PostMapping("/cadastrar")
+    public ResponseEntity<?> cadastrarNovoUsuario(@RequestBody Usuario usuario) {
         return ResponseEntity.ok(userDetailsService.save(usuario));
     }
 
