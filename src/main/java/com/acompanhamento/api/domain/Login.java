@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario {
+public class Login {
 
     @Id
     @Column(unique = true)

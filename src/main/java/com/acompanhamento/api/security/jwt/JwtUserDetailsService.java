@@ -1,9 +1,8 @@
 package com.acompanhamento.api.security.jwt;
 
 import com.acompanhamento.api.domain.Perfil;
-import com.acompanhamento.api.domain.Usuario;
+import com.acompanhamento.api.domain.Login;
 import com.acompanhamento.api.repository.UsuarioRepository;
-import com.acompanhamento.api.resource.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -28,7 +27,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        Optional<Login> usuario = usuarioRepository.findByEmail(email);
         if (usuario.isEmpty()) {
             throw new UsernameNotFoundException("Email não encontrado: " + email);
         }
@@ -45,7 +44,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         return new User(usuario.get().getEmail(), usuario.get().getSenha(), perfilTerapeuta);
     }
 
-    public Usuario save(Usuario user) {
+    public Login save(Login user) {
         user.setSenha(bcryptEncoder.encode(user.getSenha()));
         return usuarioRepository.save(user);
     }

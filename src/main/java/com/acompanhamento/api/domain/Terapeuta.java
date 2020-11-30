@@ -34,4 +34,7 @@ public class Terapeuta {
     @OneToOne
     private Endereco endereco;
 
+    @OneToOne
+    private Login login;
+
 }

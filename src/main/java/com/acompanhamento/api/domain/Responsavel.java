@@ -30,4 +30,7 @@ public class Responsavel {
     @OneToOne
     private Endereco endereco;
 
+    @OneToOne
+    private Login login;
+
 }

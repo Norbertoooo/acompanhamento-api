@@ -1,6 +1,6 @@
 package com.acompanhamento.api.resource;
 
-import com.acompanhamento.api.domain.Usuario;
+import com.acompanhamento.api.domain.Login;
 import com.acompanhamento.api.resource.dto.RespostaAutenticacaoDTO;
 import com.acompanhamento.api.resource.dto.UsuarioDTO;
 import com.acompanhamento.api.security.jwt.JwtTokenUtil;
@@ -44,8 +44,8 @@ public class LoginResource {
     }
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<?> cadastrarNovoUsuario(@RequestBody Usuario usuario) {
-        return ResponseEntity.ok(userDetailsService.save(usuario));
+    public ResponseEntity<?> cadastrarNovoUsuario(@RequestBody Login login) {
+        return ResponseEntity.ok(userDetailsService.save(login));
     }
 
     private void authenticate(String username, String password) throws Exception {

@@ -1,6 +1,6 @@
 package com.acompanhamento.api.resource;
 
-import com.acompanhamento.api.domain.Usuario;
+import com.acompanhamento.api.domain.Login;
 import com.acompanhamento.api.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +19,13 @@ public class UsuarioResource {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    public ResponseEntity<List<Usuario>> listarTodosUsuarios() {
+    public ResponseEntity<List<Login>> listarTodosUsuarios() {
         return ResponseEntity.ok(usuarioRepository.findAll());
     }
 
     @GetMapping("/{email}")
     @PreAuthorize("hasRole('ADMINISTRADOR')")
-    public ResponseEntity<Usuario> buscarPorEmail(@PathVariable String email) {
+    public ResponseEntity<Login> buscarPorEmail(@PathVariable String email) {
         return ResponseEntity.ok(usuarioRepository.findByEmail(email).get());
     }
 }
