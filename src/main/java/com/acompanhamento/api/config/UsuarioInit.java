@@ -26,7 +26,7 @@ public class UsuarioInit implements CommandLineRunner {
         log.info("Inserindo usuario administrador de teste");
         Login login = new Login();
         login.setEmail("teste@gmail.com");
-        login.setSenha(bcryptEncoder.encode("testedesenha123"));
+        login.setSenha(bcryptEncoder.encode("teste"));
         login.setPerfil(Perfil.ADMINISTRADOR);
         usuarioRepository.save(login);
     }
