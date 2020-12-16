@@ -2,7 +2,7 @@ package com.acompanhamento.api.config;
 
 import com.acompanhamento.api.domain.Perfil;
 import com.acompanhamento.api.domain.Login;
-import com.acompanhamento.api.repository.UsuarioRepository;
+import com.acompanhamento.api.repository.LoginRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -10,14 +10,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @Log4j2
-public class UsuarioInit implements CommandLineRunner {
+public class LoginInit implements CommandLineRunner {
 
-    private final UsuarioRepository usuarioRepository;
+    private final LoginRepository loginRepository;
 
     private final PasswordEncoder bcryptEncoder;
 
-    public UsuarioInit(UsuarioRepository usuarioRepository, PasswordEncoder bcryptEncoder) {
-        this.usuarioRepository = usuarioRepository;
+    public LoginInit(LoginRepository loginRepository, PasswordEncoder bcryptEncoder) {
+        this.loginRepository = loginRepository;
         this.bcryptEncoder = bcryptEncoder;
     }
 
@@ -28,6 +28,6 @@ public class UsuarioInit implements CommandLineRunner {
         login.setEmail("teste@gmail.com");
         login.setSenha(bcryptEncoder.encode("teste"));
         login.setPerfil(Perfil.ADMINISTRADOR);
-        usuarioRepository.save(login);
+        loginRepository.save(login);
     }
 }

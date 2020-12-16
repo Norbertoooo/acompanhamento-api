@@ -2,7 +2,7 @@ package com.acompanhamento.api.security.jwt;
 
 import com.acompanhamento.api.domain.Perfil;
 import com.acompanhamento.api.domain.Login;
-import com.acompanhamento.api.repository.UsuarioRepository;
+import com.acompanhamento.api.repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -20,14 +20,14 @@ import java.util.Optional;
 public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private LoginRepository loginRepository;
 
     @Autowired
     private PasswordEncoder bcryptEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Login> usuario = usuarioRepository.findByEmail(email);
+        Optional<Login> usuario = loginRepository.findByEmail(email);
         if (usuario.isEmpty()) {
             throw new UsernameNotFoundException("Email não encontrado: " + email);
         }
@@ -46,7 +46,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     public Login save(Login user) {
         user.setSenha(bcryptEncoder.encode(user.getSenha()));
-        return usuarioRepository.save(user);
+        return loginRepository.save(user);
     }
 
 }
