@@ -1,8 +1,9 @@
 package com.acompanhamento.api.security.jwt;
 
-import com.acompanhamento.api.domain.Perfil;
 import com.acompanhamento.api.domain.Login;
-import com.acompanhamento.api.repository.LoginRepository;
+import com.acompanhamento.api.domain.Perfil;
+import com.acompanhamento.api.service.LoginService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -10,7 +11,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,14 +20,12 @@ import java.util.Optional;
 public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private LoginRepository loginRepository;
+    private LoginService loginService;
 
-    @Autowired
-    private PasswordEncoder bcryptEncoder;
-
+    @SneakyThrows
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Login> usuario = loginRepository.findByEmail(email);
+        Optional<Login> usuario = loginService.findByEmail(email);
         if (usuario.isEmpty()) {
             throw new UsernameNotFoundException("Email não encontrado: " + email);
         }
@@ -42,11 +40,6 @@ public class JwtUserDetailsService implements UserDetailsService {
             return new User(usuario.get().getEmail(), usuario.get().getSenha(), perfilResponsavel);
         }
         return new User(usuario.get().getEmail(), usuario.get().getSenha(), perfilTerapeuta);
-    }
-
-    public Login save(Login user) {
-        user.setSenha(bcryptEncoder.encode(user.getSenha()));
-        return loginRepository.save(user);
     }
 
 }

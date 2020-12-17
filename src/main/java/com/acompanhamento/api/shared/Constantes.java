@@ -2,11 +2,16 @@ package com.acompanhamento.api.shared;
 
 public class Constantes {
 
-    public static class Variaveis {
+    public interface Variaveis {
 
     }
 
-    public static class Mensagens {
+    public interface Mensagens {
+        String CADASTRO_SUCESSO = "Cadastro realizado com sucesso";
+    }
 
+    public interface MensagensDeErro {
+        String FALHA_AO_CADASTRAR = "Falha ao cadastrar novo usuario";
+        String LOGIN_JA_EXISTENTE = "Email já cadastrado";
     }
 }
