@@ -10,12 +10,17 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "login")
 public class Login {
 
     @Id
-    @Column(unique = true)
+    @Column(name = "email", unique = true)
     private String email;
+
+    @Column(name = "senha")
     private String senha;
+
+    @Column(name = "perfil")
     @Enumerated(EnumType.STRING)
     private Perfil perfil;
 

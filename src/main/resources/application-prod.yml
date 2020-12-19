@@ -4,6 +4,11 @@ spring:
     password: rafa
     driver-class-name: org.postgresql.Driver
     platform: org.hibernate.dialect.PostgreSQLDialect
+    url:
+  jpa:
+    database: postgresql
+  flyway:
+    enabled: true
 logging:
   level:
     web: info

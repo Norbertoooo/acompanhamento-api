@@ -7,8 +7,11 @@ spring:
     platform: org.hibernate.dialect.H2Dialect
   jpa:
     open-in-view: true
+    show-sql: true
   devtools:
     add-properties: true
+  flyway:
+    enabled: true
 logging:
-  level: 
+  level:
     web: debug

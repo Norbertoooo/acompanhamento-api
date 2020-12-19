@@ -18,9 +18,11 @@ public class LoginDTO {
 
     @Email
     private String email;
+
     @NotBlank
     @Length(min = 6, max = 12)
     private String senha;
+
     @Enumerated(EnumType.STRING)
     private Perfil perfil;
 

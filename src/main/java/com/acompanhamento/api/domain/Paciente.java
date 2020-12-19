@@ -20,7 +20,8 @@ public class Paciente {
 
     private Integer idade;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_ficha", referencedColumnName = "id")
     private Ficha ficha;
 
 }

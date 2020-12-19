@@ -1,15 +1,13 @@
 package com.acompanhamento.api.resource;
 
 import com.acompanhamento.api.domain.Login;
-import com.acompanhamento.api.domain.Responsavel;
-import com.acompanhamento.api.domain.Terapeuta;
-import com.acompanhamento.api.repository.ResponsavelRepository;
-import com.acompanhamento.api.repository.TerapeutaRepository;
 import com.acompanhamento.api.resource.dto.LoginDTO;
 import com.acompanhamento.api.resource.dto.RespostaAutenticacaoDTO;
 import com.acompanhamento.api.security.jwt.JwtTokenUtil;
 import com.acompanhamento.api.security.jwt.JwtUserDetailsService;
 import com.acompanhamento.api.service.LoginService;
+import com.acompanhamento.api.service.ResponsavelService;
+import com.acompanhamento.api.service.TerapeutaService;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -44,19 +42,19 @@ public class LoginResource {
 
     private final LoginService loginService;
 
-    private final TerapeutaRepository terapeutaRepository;
+    private final ResponsavelService responsavelService;
 
-    private final ResponsavelRepository responsavelRepository;
+    private final TerapeutaService terapeutaService;
 
     private final ModelMapper modelMapper;
 
-    public LoginResource(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, JwtUserDetailsService userDetailsService, LoginService loginService, TerapeutaRepository terapeutaRepository, ResponsavelRepository responsavelRepository, ModelMapper modelMapper) {
+    public LoginResource(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, JwtUserDetailsService userDetailsService, LoginService loginService, ResponsavelService responsavelService, TerapeutaService terapeutaService, ModelMapper modelMapper) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
         this.userDetailsService = userDetailsService;
         this.loginService = loginService;
-        this.terapeutaRepository = terapeutaRepository;
-        this.responsavelRepository = responsavelRepository;
+        this.responsavelService = responsavelService;
+        this.terapeutaService = terapeutaService;
         this.modelMapper = modelMapper;
     }
 
@@ -80,18 +78,11 @@ public class LoginResource {
         }
         log.info("Requisição para cadastrar novo usuário: {}", login);
         if (login.getPerfil().equals(TERAPEUTA)) {
-            Terapeuta terapeuta = new Terapeuta();
-            loginService.save(login);
-            terapeuta.setLogin(login);
-            terapeutaRepository.save(terapeuta);
+            terapeutaService.cadastrarLoginTerapeuta(login);
             return ResponseEntity.ok(CADASTRO_SUCESSO);
-            // TODO: 17/12/2020 virar metodo de um service
         }
         if (login.getPerfil().equals(RESPONSAVEL)) {
-            Responsavel responsavel = new Responsavel();
-            loginService.save(login);
-            responsavel.setLogin(login);
-            responsavelRepository.save(responsavel);
+            responsavelService.cadastrarLoginResponsavel(login);
             return ResponseEntity.ok(CADASTRO_SUCESSO);
         }
         return ResponseEntity.badRequest().body(FALHA_AO_CADASTRAR);

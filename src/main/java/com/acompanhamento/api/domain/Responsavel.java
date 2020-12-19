@@ -26,10 +26,15 @@ public class Responsavel {
 
     private String parentesco;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_endereco", referencedColumnName = "id")
     private Endereco endereco;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_login", referencedColumnName = "email")
     private Login login;
 
+    public Responsavel(Login login) {
+        this.login = login;
+    }
 }

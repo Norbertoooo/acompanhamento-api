@@ -8,5 +8,6 @@ services:
     environment:
       - POSTGRES_USER=rafa
       - POSTGRES_PASSWORD=rafa
+      - POSTGRES_DB=rafa
     ports:
       - 5432:5432

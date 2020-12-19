@@ -30,10 +30,15 @@ public class Terapeuta {
 
     private String formacao;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_endereco", referencedColumnName = "id")
     private Endereco endereco;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_login", referencedColumnName = "email")
     private Login login;
 
+    public Terapeuta(Login login) {
+        this.login = login;
+    }
 }

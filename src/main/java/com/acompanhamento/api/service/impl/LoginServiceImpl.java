@@ -28,12 +28,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Optional<Login> findByEmail(String email) throws Exception {
-        Optional<Login> login = loginRepository.findByEmail(email);
-        if (login.isPresent()) {
-            return login;
-        } else {
-            throw new Exception("Login não encontrada para o email informado");
-        }
+        return loginRepository.findByEmail(email);
     }
 
     @Override
