@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FichaRepository extends JpaRepository<Ficha, Long> {
+    Ficha findByPaciente_NomeCompleto(String nomeCompleto);
 }

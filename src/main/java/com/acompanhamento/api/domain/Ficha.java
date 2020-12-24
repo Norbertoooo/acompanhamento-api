@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -21,11 +18,14 @@ public class Ficha {
 
     private String observacoes;
 
-    private String nivel;
+    private Long nivel;
 
     private String sensibilidade;
 
-    private String duracao;
+    private Long duracao;
 
     private Long pontuacao;
+
+    @OneToOne( mappedBy = "ficha", fetch = FetchType.LAZY)
+    private Paciente paciente;
 }

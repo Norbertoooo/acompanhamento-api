@@ -8,5 +8,10 @@ import java.util.Optional;
 
 @Repository
 public interface TerapeutaRepository extends JpaRepository<Terapeuta, Long> {
-  Optional<Terapeuta> findByNomeCompleto(String nome);
+    Optional<Terapeuta> findByNomeCompleto(String nome);
+
+    Optional<Terapeuta> findByLogin_Email(String email);
+
+    Optional<Terapeuta> findByCrp(Long crp);
+
 }

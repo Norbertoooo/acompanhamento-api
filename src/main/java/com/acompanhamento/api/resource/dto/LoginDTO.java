@@ -17,6 +17,7 @@ import javax.validation.constraints.NotBlank;
 public class LoginDTO {
 
     @Email
+    @NotBlank
     private String email;
 
     @NotBlank
