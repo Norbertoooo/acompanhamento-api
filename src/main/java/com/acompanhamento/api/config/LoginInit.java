@@ -7,12 +7,14 @@ import com.acompanhamento.api.service.TerapeutaService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static com.acompanhamento.api.domain.Perfil.*;
 
 @Configuration
 @Log4j2
+@Profile("dev")
 public class LoginInit implements CommandLineRunner {
 
     private final LoginService loginService;
@@ -37,7 +39,24 @@ public class LoginInit implements CommandLineRunner {
 
         log.info("Inserindo usuário Terapeuta");
         terapeutaService.cadastrarLoginTerapeuta(
-                new Login("terapeuta@gmail.com", bcryptEncoder.encode("teste123"), TERAPEUTA));
+                new Login("terapeuta1@gmail.com", bcryptEncoder.encode("teste123"), TERAPEUTA));
+
+        log.info("Inserindo usuário Terapeuta");
+        terapeutaService.cadastrarLoginTerapeuta(
+                new Login("terapeuta2@gmail.com", bcryptEncoder.encode("teste123"), TERAPEUTA));
+
+        log.info("Inserindo usuário Terapeuta");
+        terapeutaService.cadastrarLoginTerapeuta(
+                new Login("terapeuta3@gmail.com", bcryptEncoder.encode("teste123"), TERAPEUTA));
+
+        log.info("Inserindo usuário Terapeuta");
+        terapeutaService.cadastrarLoginTerapeuta(
+                new Login("terapeuta4@gmail.com", bcryptEncoder.encode("teste123"), TERAPEUTA));
+
+        log.info("Inserindo usuário Terapeuta");
+        terapeutaService.cadastrarLoginTerapeuta(
+                new Login("terapeuta5@gmail.com", bcryptEncoder.encode("teste123"), TERAPEUTA));
+
 
         log.info("Inserindo usuário Responsavel");
         responsavelService.cadastrarLoginResponsavel(
