@@ -50,12 +50,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    // TODO: 24/12/2020 adicionar prefixo api aos endpoints
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/autenticar","/cadastrar","/h2-console/**", "/terapeutas/**","/pacientes/**","/fichas/**").permitAll()
+                .antMatchers("/autenticar","/cadastrar","/h2-console/**", "/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)

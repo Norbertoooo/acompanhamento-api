@@ -16,10 +16,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -30,6 +27,7 @@ import static com.acompanhamento.api.shared.Constantes.MensagensDeErro.FALHA_AO_
 import static com.acompanhamento.api.shared.Constantes.MensagensDeErro.LOGIN_JA_EXISTENTE;
 
 @RestController
+@RequestMapping("/api/")
 @CrossOrigin(origins = "*")
 @Log4j2
 public class LoginResource {
@@ -58,7 +56,7 @@ public class LoginResource {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping("/autenticar")
+    @PostMapping("autenticar")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginDTO authenticationRequest) throws Exception {
 
         authenticate(authenticationRequest.getEmail(), authenticationRequest.getSenha());
@@ -70,7 +68,7 @@ public class LoginResource {
         return ResponseEntity.ok(new RespostaAutenticacaoDTO(token));
     }
 
-    @PostMapping("/cadastrar")
+    @PostMapping("cadastrar")
     public ResponseEntity<?> cadastrarNovoUsuario(@Valid @RequestBody LoginDTO loginDTO) {
         Login login = modelMapper.map(loginDTO, Login.class);
         if (loginService.loginExistente(login.getEmail())) {

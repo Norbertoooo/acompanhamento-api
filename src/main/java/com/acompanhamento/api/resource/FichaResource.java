@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/fichas/")
+@RequestMapping("/api/fichas/")
 @CrossOrigin(origins = "*")
 @Log4j2
 public class FichaResource {
