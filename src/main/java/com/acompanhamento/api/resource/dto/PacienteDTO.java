@@ -7,18 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FichaDTO {
+public class PacienteDTO {
 
     private Long id;
 
-    private String observacoes;
+    private String nomeCompleto;
 
-    private Long nivel;
+    private Integer idade;
 
-    private String sensibilidade;
-
-    private Long duracao;
-
-    private Long pontuacao;
+    private Long fichaId;
 
 }

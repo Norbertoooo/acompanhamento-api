@@ -1,12 +1,16 @@
 package com.acompanhamento.api.resource;
 
 import com.acompanhamento.api.domain.Paciente;
+import com.acompanhamento.api.resource.dto.PacienteDTO;
 import com.acompanhamento.api.service.PacienteService;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/pacientes/")
@@ -16,13 +20,19 @@ public class PacienteResource {
 
     private final PacienteService pacienteService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     public PacienteResource(PacienteService pacienteService) {
         this.pacienteService = pacienteService;
     }
 
     @GetMapping("{email}")
-    public ResponseEntity<List<Paciente>> listarPacientesPeloEmailDoTerapeuta(@PathVariable String email) {
-        return ResponseEntity.ok(pacienteService.listarPacientesPeloEmailDoTerapeuta(email));
+    public ResponseEntity<List<PacienteDTO>> listarPacientesPeloEmailDoTerapeuta(@PathVariable String email) {
+        List<PacienteDTO> pacienteDTOS = pacienteService.listarPacientesPeloEmailDoTerapeuta(email).stream().map(
+                paciente -> modelMapper.map(paciente, PacienteDTO.class)
+        ).collect(Collectors.toList());
+        return ResponseEntity.ok(pacienteDTOS);
     }
 
     @GetMapping("{nome}/{email}")

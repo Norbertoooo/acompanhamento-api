@@ -1,16 +1,21 @@
 package com.acompanhamento.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Endereco {
+public class Endereco implements Serializable {
+
+    private static final long serialVersionUID = 42L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +31,20 @@ public class Endereco {
 
     private String detalhes;
 
+    @JsonIgnore
+    @OneToOne( mappedBy = "endereco")
+    private Terapeuta terapeuta;
+
+    @Override
+    public String toString() {
+        return "Endereco{" +
+                "id=" + id +
+                ", cep=" + cep +
+                ", numero=" + numero +
+                ", rua='" + rua + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", detalhes='" + detalhes + '\'' +
+                ", terapeuta=" + terapeuta +
+                '}';
+    }
 }

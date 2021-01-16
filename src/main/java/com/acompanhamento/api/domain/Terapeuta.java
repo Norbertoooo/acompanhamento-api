@@ -1,18 +1,25 @@
 package com.acompanhamento.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Terapeuta {
+public class Terapeuta implements Serializable {
+
+    private static final long serialVersionUID = 42L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,11 +27,12 @@ public class Terapeuta {
 
     private String nomeCompleto;
 
-    private Integer idade;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private Date dataNascimento;
 
     private Long telefone;
 
-    private Long crp;
+    private Long crfa;
 
     private String cpf;
 
@@ -34,15 +42,33 @@ public class Terapeuta {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco", referencedColumnName = "id")
-    private Endereco endereco;
+    private Endereco endereco = new Endereco();
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_login", referencedColumnName = "email")
+    @JoinColumn(name = "id_login", referencedColumnName = "email", nullable = false)
     private Login login;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "terapeuta", fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "terapeuta", orphanRemoval = true)
+    @JsonIgnore
     @JsonManagedReference
     private List<Paciente> pacientes;
+
+    @Override
+    public String toString() {
+        return "Terapeuta{" +
+                "id=" + id +
+                ", nomeCompleto='" + nomeCompleto + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", telefone=" + telefone +
+                ", crfa=" + crfa +
+                ", cpf='" + cpf + '\'' +
+                ", especialidade='" + especialidade + '\'' +
+                ", formacao='" + formacao + '\'' +
+                ", endereco=" + endereco +
+                ", login=" + login +
+                ", pacientes=" + pacientes +
+                '}';
+    }
 
     public Terapeuta(Login login) {
         this.login = login;

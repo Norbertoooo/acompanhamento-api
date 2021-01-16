@@ -7,18 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FichaDTO {
+public class ResponsavelDTO {
 
     private Long id;
 
-    private String observacoes;
-
-    private Long nivel;
-
-    private String sensibilidade;
-
-    private Long duracao;
-
-    private Long pontuacao;
-
+    private String nomeCompleto;
 }

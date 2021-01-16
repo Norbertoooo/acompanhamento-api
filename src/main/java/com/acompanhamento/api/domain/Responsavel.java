@@ -5,12 +5,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Responsavel {
+public class Responsavel implements Serializable {
+
+    private static final long serialVersionUID = 42L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,15 +30,34 @@ public class Responsavel {
 
     private String parentesco;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_endereco", referencedColumnName = "id")
     private Endereco endereco;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_login", referencedColumnName = "email")
     private Login login;
 
+    @ManyToOne
+    @JoinColumn(name = "id_responsavel", nullable = false)
+    private Paciente pacientes;
+
     public Responsavel(Login login) {
         this.login = login;
+    }
+
+    @Override
+    public String toString() {
+        return "Responsavel{" +
+                "id=" + id +
+                ", nomeCompleto='" + nomeCompleto + '\'' +
+                ", idade=" + idade +
+                ", telefone=" + telefone +
+                ", cpf='" + cpf + '\'' +
+                ", parentesco='" + parentesco + '\'' +
+                ", endereco=" + endereco +
+                ", login=" + login +
+                ", pacientes=" + pacientes +
+                '}';
     }
 }

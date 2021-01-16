@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.acompanhamento.api.shared.Constantes.MensagensDeErro.LOGIN_JA_EXISTENTE;
+
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -32,7 +34,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public boolean loginExistente(String email) {
-        return loginRepository.existsById(email);
+    public void loginExistente(String email) throws Exception {
+        loginRepository.findByEmail(email).orElseThrow( () -> new Exception(LOGIN_JA_EXISTENTE));
     }
 }

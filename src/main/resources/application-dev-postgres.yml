@@ -6,12 +6,14 @@ spring:
     platform: org.hibernate.dialect.PostgreSQLDialect
     url: jdbc:postgresql://localhost:5432/rafa
   jpa:
+    open-in-view: false
     database: postgresql
   flyway:
     enabled: true
   h2:
     console:
       enabled: false
+
 logging:
   level:
     web: debug

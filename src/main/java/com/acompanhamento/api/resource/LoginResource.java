@@ -1,6 +1,8 @@
 package com.acompanhamento.api.resource;
 
 import com.acompanhamento.api.domain.Login;
+import com.acompanhamento.api.domain.Terapeuta;
+import com.acompanhamento.api.resource.dto.CadastroTerapeutaDTO;
 import com.acompanhamento.api.resource.dto.LoginDTO;
 import com.acompanhamento.api.resource.dto.RespostaAutenticacaoDTO;
 import com.acompanhamento.api.security.jwt.JwtTokenUtil;
@@ -65,25 +67,15 @@ public class LoginResource {
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new RespostaAutenticacaoDTO(token));
+        return ResponseEntity.ok(new RespostaAutenticacaoDTO(authenticationRequest,token));
     }
 
     @PostMapping("cadastrar")
-    public ResponseEntity<?> cadastrarNovoUsuario(@Valid @RequestBody LoginDTO loginDTO) {
-        Login login = modelMapper.map(loginDTO, Login.class);
-        if (loginService.loginExistente(login.getEmail())) {
-            return ResponseEntity.badRequest().body(LOGIN_JA_EXISTENTE);
-        }
-        log.info("Requisição para cadastrar novo usuário: {}", login);
-        if (login.getPerfil().equals(TERAPEUTA)) {
-            terapeutaService.cadastrarLoginTerapeuta(login);
-            return ResponseEntity.ok(CADASTRO_SUCESSO);
-        }
-        if (login.getPerfil().equals(RESPONSAVEL)) {
-            responsavelService.cadastrarLoginResponsavel(login);
-            return ResponseEntity.ok(CADASTRO_SUCESSO);
-        }
-        return ResponseEntity.badRequest().body(FALHA_AO_CADASTRAR);
+    public ResponseEntity<?> cadastrarTerapeuta(@Valid @RequestBody CadastroTerapeutaDTO cadastroTerapeutaDTO) throws Exception {
+        log.info("Requisição para cadastrar novo terapeuta: {}", cadastroTerapeutaDTO);
+        Login login = modelMapper.map(cadastroTerapeutaDTO.getLogin(), Login.class);
+        Terapeuta terapeuta = modelMapper.map(cadastroTerapeutaDTO, Terapeuta.class);
+        return ResponseEntity.ok(terapeutaService.cadastrarLoginTerapeuta(terapeuta));
     }
 
     private void authenticate(String username, String password) throws Exception {
