@@ -5,9 +5,11 @@ import com.acompanhamento.api.repository.PacienteRepository;
 import com.acompanhamento.api.service.PacienteService;
 import com.acompanhamento.api.service.TerapeutaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class PacienteServiceImpl implements PacienteService {
@@ -26,8 +28,9 @@ public class PacienteServiceImpl implements PacienteService {
     }
 
     @Override
-    public List<Paciente> listarPacientesPeloEmailDoTerapeuta(String email) {
-        return pacienteRepository.findAllByTerapeuta_Login_Email(email);
+    public Page<Paciente> listarPacientesPeloEmailDoTerapeuta(String email, Integer page, Integer count) {
+        Pageable pages = PageRequest.of(page, count);
+        return pacienteRepository.findAllByTerapeuta_Login_Email(email, pages);
     }
 
     @Override

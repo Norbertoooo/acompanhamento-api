@@ -16,7 +16,7 @@ import static com.acompanhamento.api.domain.Perfil.*;
 
 @Configuration
 @Log4j2
-@Profile("dev-postgres")
+@Profile("dev")
 public class LoginInit implements CommandLineRunner {
 
     private final LoginService loginService;

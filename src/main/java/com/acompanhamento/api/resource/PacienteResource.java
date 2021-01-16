@@ -6,6 +6,7 @@ import com.acompanhamento.api.service.PacienteService;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,12 +28,11 @@ public class PacienteResource {
         this.pacienteService = pacienteService;
     }
 
-    @GetMapping("{email}")
-    public ResponseEntity<List<PacienteDTO>> listarPacientesPeloEmailDoTerapeuta(@PathVariable String email) {
-        List<PacienteDTO> pacienteDTOS = pacienteService.listarPacientesPeloEmailDoTerapeuta(email).stream().map(
-                paciente -> modelMapper.map(paciente, PacienteDTO.class)
-        ).collect(Collectors.toList());
-        return ResponseEntity.ok(pacienteDTOS);
+    @GetMapping("{email}/{page}/{count}")
+    public ResponseEntity<Page<Paciente>> listarPacientesPeloEmailDoTerapeuta(@PathVariable String email,
+                                                                              @PathVariable Integer page,
+                                                                              @PathVariable Integer count) {
+        return ResponseEntity.ok(pacienteService.listarPacientesPeloEmailDoTerapeuta(email,page,count));
     }
 
     @GetMapping("{nome}/{email}")
