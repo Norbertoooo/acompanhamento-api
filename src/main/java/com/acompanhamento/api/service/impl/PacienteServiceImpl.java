@@ -2,6 +2,7 @@ package com.acompanhamento.api.service.impl;
 
 import com.acompanhamento.api.domain.Paciente;
 import com.acompanhamento.api.repository.PacienteRepository;
+import com.acompanhamento.api.resource.exception.ResourceNotFoundException;
 import com.acompanhamento.api.service.PacienteService;
 import com.acompanhamento.api.service.TerapeutaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,10 @@ public class PacienteServiceImpl implements PacienteService {
     @Autowired
     private TerapeutaService terapeutaService;
 
-    // TODO: 24/12/2020 adicionar exceção personalizada
     @Override
-    public Paciente buscarPacientePeloNome(String nome, String email) throws Exception {
+    public Paciente buscarPacientePeloNome(String nome, String email) {
         return pacienteRepository.findByNomeCompletoAndTerapeuta_Login_Email(nome, email)
-                .orElseThrow(() -> new Exception("Paciente não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Paciente não encontrado"));
     }
 
     @Override

@@ -14,6 +14,6 @@ public class Exception {
     private String mensagem;
     private OffsetDateTime data = OffsetDateTime.now();
     private String url;
-    private Long status;
+    private Integer status;
 
 }
