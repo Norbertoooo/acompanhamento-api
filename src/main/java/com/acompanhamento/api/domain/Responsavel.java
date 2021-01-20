@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Data
@@ -38,26 +37,12 @@ public class Responsavel implements Serializable {
     @JoinColumn(name = "id_login", referencedColumnName = "email")
     private Login login;
 
-    @ManyToOne
-    @JoinColumn(name = "id_responsavel", nullable = false)
-    private Paciente pacientes;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_paciente")
+    private Paciente paciente;
 
     public Responsavel(Login login) {
         this.login = login;
     }
 
-    @Override
-    public String toString() {
-        return "Responsavel{" +
-                "id=" + id +
-                ", nomeCompleto='" + nomeCompleto + '\'' +
-                ", idade=" + idade +
-                ", telefone=" + telefone +
-                ", cpf='" + cpf + '\'' +
-                ", parentesco='" + parentesco + '\'' +
-                ", endereco=" + endereco +
-                ", login=" + login +
-                ", pacientes=" + pacientes +
-                '}';
-    }
 }

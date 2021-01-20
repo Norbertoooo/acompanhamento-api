@@ -1,7 +1,6 @@
 package com.acompanhamento.api.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,19 +34,7 @@ public class Paciente implements Serializable {
     @JsonBackReference
     private Terapeuta terapeuta;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "pacientes")
-    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente", fetch = FetchType.EAGER)
     private List<Responsavel> responsaveis;
 
-    @Override
-    public String toString() {
-        return "Paciente{" +
-                "id=" + id +
-                ", nomeCompleto='" + nomeCompleto + '\'' +
-                ", idade=" + idade +
-                ", ficha=" + ficha +
-                ", terapeuta=" + terapeuta +
-                ", responsaveis=" + responsaveis +
-                '}';
-    }
 }

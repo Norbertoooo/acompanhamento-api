@@ -20,7 +20,6 @@ public class Terapeuta implements Serializable {
 
     private static final long serialVersionUID = 42L;
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -50,28 +49,6 @@ public class Terapeuta implements Serializable {
 
     @OneToMany(mappedBy = "terapeuta", orphanRemoval = true)
     @JsonIgnore
-    @JsonManagedReference
     private List<Paciente> pacientes;
-
-    @Override
-    public String toString() {
-        return "Terapeuta{" +
-                "id=" + id +
-                ", nomeCompleto='" + nomeCompleto + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", telefone=" + telefone +
-                ", crfa=" + crfa +
-                ", cpf='" + cpf + '\'' +
-                ", especialidade='" + especialidade + '\'' +
-                ", formacao='" + formacao + '\'' +
-                ", endereco=" + endereco +
-                ", login=" + login +
-                ", pacientes=" + pacientes +
-                '}';
-    }
-
-    public Terapeuta(Login login) {
-        this.login = login;
-    }
 
 }

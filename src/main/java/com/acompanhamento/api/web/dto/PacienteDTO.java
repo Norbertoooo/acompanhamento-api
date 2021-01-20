@@ -1,4 +1,4 @@
-package com.acompanhamento.api.resource.dto;
+package com.acompanhamento.api.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

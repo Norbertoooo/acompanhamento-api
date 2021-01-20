@@ -1,7 +1,6 @@
-package com.acompanhamento.api.resource;
+package com.acompanhamento.api.web;
 
 import com.acompanhamento.api.domain.Paciente;
-import com.acompanhamento.api.resource.dto.PacienteDTO;
 import com.acompanhamento.api.service.PacienteService;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -9,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/pacientes/")
@@ -32,7 +28,7 @@ public class PacienteResource {
     public ResponseEntity<Page<Paciente>> listarPacientesPeloEmailDoTerapeuta(@PathVariable String email,
                                                                               @PathVariable Integer page,
                                                                               @PathVariable Integer count) {
-        return ResponseEntity.ok(pacienteService.listarPacientesPeloEmailDoTerapeuta(email,page,count));
+        return ResponseEntity.ok(pacienteService.listarPacientesPeloEmailDoTerapeuta(email, page, count));
     }
 
     @GetMapping("{nome}/{email}")
@@ -50,6 +46,13 @@ public class PacienteResource {
     public ResponseEntity<Void> removerPacientePeloNome(@PathVariable String nome, @PathVariable String email) {
         log.info("Requisição para remover paciente {} para o terapeuta do email {}", nome, email);
         pacienteService.removerPacientePeloNome(nome, email);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/id/{id}/{email}")
+    public ResponseEntity<Void> removerPacientePeloId(@PathVariable Long id, @PathVariable String email) {
+        log.info("Requisição para remover paciente {} para o terapeuta do email {}", id, email);
+        pacienteService.removerPacientePeloId(id, email);
         return ResponseEntity.noContent().build();
     }
 

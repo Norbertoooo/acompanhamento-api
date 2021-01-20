@@ -1,4 +1,4 @@
-package com.acompanhamento.api.resource.exception;
+package com.acompanhamento.api.web.exception;
 
 public class ResourceNotFoundException extends RuntimeException{
     public ResourceNotFoundException(String msg) {

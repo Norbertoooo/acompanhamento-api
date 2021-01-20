@@ -1,4 +1,4 @@
-package com.acompanhamento.api.resource;
+package com.acompanhamento.api.web;
 
 import com.acompanhamento.api.domain.Login;
 import com.acompanhamento.api.service.LoginService;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;

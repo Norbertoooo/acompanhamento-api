@@ -16,7 +16,6 @@ public class Ficha implements Serializable {
 
     private static final long serialVersionUID = 42L;
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,16 +34,4 @@ public class Ficha implements Serializable {
     @JsonBackReference
     private Paciente paciente;
 
-    @Override
-    public String toString() {
-        return "Ficha{" +
-                "id=" + id +
-                ", observacoes='" + observacoes + '\'' +
-                ", nivel=" + nivel +
-                ", sensibilidade='" + sensibilidade + '\'' +
-                ", duracao=" + duracao +
-                ", pontuacao=" + pontuacao +
-                ", paciente=" + paciente +
-                '}';
-    }
 }

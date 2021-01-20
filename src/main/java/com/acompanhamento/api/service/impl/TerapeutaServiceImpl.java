@@ -1,11 +1,12 @@
 package com.acompanhamento.api.service.impl;
 
-import com.acompanhamento.api.domain.Login;
-import com.acompanhamento.api.domain.Perfil;
 import com.acompanhamento.api.domain.Terapeuta;
 import com.acompanhamento.api.repository.TerapeutaRepository;
-import com.acompanhamento.api.resource.dto.CadastroTerapeutaDTO;
+import com.acompanhamento.api.web.exception.ResourceNotFoundException;
 import com.acompanhamento.api.service.TerapeutaService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,27 +32,36 @@ public class TerapeutaServiceImpl implements TerapeutaService {
     }
 
     @Override
-    public Terapeuta buscarTerapeutaPorNome(String nome) throws Exception {
-        return terapeutaRepository.findByNomeCompleto(nome).orElseThrow(() -> new Exception(TERAPEUTA_NAO_ENCONTRADO));
+    public Terapeuta buscarTerapeutaPorNome(String nome) {
+        return terapeutaRepository.findByNomeCompleto(nome)
+                .orElseThrow(() -> new ResourceNotFoundException(TERAPEUTA_NAO_ENCONTRADO));
     }
 
     @Override
-    public Terapeuta buscarTerapeutaPorEmail(String email) throws Exception {
-        return terapeutaRepository.findByLogin_Email(email).orElseThrow(() -> new Exception(TERAPEUTA_NAO_ENCONTRADO));
+    public Terapeuta buscarTerapeutaPorEmail(String email) {
+        return terapeutaRepository.findByLogin_Email(email)
+                .orElseThrow(() -> new ResourceNotFoundException(TERAPEUTA_NAO_ENCONTRADO));
     }
 
     @Override
-    public Terapeuta buscarTerapeutaPeloCrfa(Long crfa) throws Exception {
-        return terapeutaRepository.findByCrfa(crfa).orElseThrow(() -> new Exception(TERAPEUTA_NAO_ENCONTRADO));
+    public Terapeuta buscarTerapeutaPeloCrfa(Long crfa) {
+        return terapeutaRepository.findByCrfa(crfa)
+                .orElseThrow(() -> new ResourceNotFoundException(TERAPEUTA_NAO_ENCONTRADO));
     }
 
     @Override
-    public Terapeuta atualizarInformacoes(Terapeuta terapeutaAlterado, String email) throws Exception {
+    public Terapeuta atualizarInformacoes(Terapeuta terapeutaAlterado, String email) {
         Terapeuta terapeuta = buscarTerapeutaPorEmail(email);
         terapeuta.setNomeCompleto(terapeutaAlterado.getNomeCompleto());
         terapeuta.setCrfa(terapeutaAlterado.getCrfa());
         terapeuta.setCpf(terapeutaAlterado.getCpf());
         return terapeutaRepository.save(terapeuta);
+    }
+
+    @Override
+    public Page<Terapeuta> listarTerapeutas(Integer page, Integer count) {
+        Pageable pageable = PageRequest.of(page, count);
+        return terapeutaRepository.findAll(pageable);
     }
 
 }

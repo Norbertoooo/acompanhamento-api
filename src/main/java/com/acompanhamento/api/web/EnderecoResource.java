@@ -1,4 +1,4 @@
-package com.acompanhamento.api.resource;
+package com.acompanhamento.api.web;
 
 import com.acompanhamento.api.domain.Endereco;
 import com.acompanhamento.api.service.EnderecoService;

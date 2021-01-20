@@ -1,8 +1,8 @@
-package com.acompanhamento.api.resource;
+package com.acompanhamento.api.web;
 
 import com.acompanhamento.api.domain.Ficha;
 import com.acompanhamento.api.repository.FichaRepository;
-import com.acompanhamento.api.resource.dto.FichaDTO;
+import com.acompanhamento.api.web.dto.FichaDTO;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,5 @@
-package com.acompanhamento.api.resource.dto;
+package com.acompanhamento.api.web.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,12 +9,12 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CadastroTerapeutaDTO {
+public class TerapeutaDTO {
+
     private Long id;
 
     private String nomeCompleto;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date dataNascimento;
 
     private Long telefone;
@@ -28,6 +27,7 @@ public class CadastroTerapeutaDTO {
 
     private String formacao;
 
-    private LoginDTO login;
+    private String loginEmail;
 
+    private Long enderecoId;
 }

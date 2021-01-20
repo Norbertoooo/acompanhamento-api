@@ -2,15 +2,16 @@ package com.acompanhamento.api.service.impl;
 
 import com.acompanhamento.api.domain.Paciente;
 import com.acompanhamento.api.repository.PacienteRepository;
-import com.acompanhamento.api.resource.exception.ResourceNotFoundException;
+import com.acompanhamento.api.web.exception.ResourceNotFoundException;
 import com.acompanhamento.api.service.PacienteService;
 import com.acompanhamento.api.service.TerapeutaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Service
 public class PacienteServiceImpl implements PacienteService {
@@ -42,5 +43,11 @@ public class PacienteServiceImpl implements PacienteService {
     @Override
     public void removerPacientePeloNome(String nome, String email) {
         pacienteRepository.deleteByNomeCompletoAndTerapeuta_Login_Email(nome, email);
+    }
+
+    @Override
+    @Transactional
+    public void removerPacientePeloId(Long id, String email) {
+        pacienteRepository.deleteById(id);
     }
 }

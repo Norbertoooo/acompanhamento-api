@@ -1,10 +1,10 @@
-package com.acompanhamento.api.resource;
+package com.acompanhamento.api.web;
 
 import com.acompanhamento.api.domain.Login;
 import com.acompanhamento.api.domain.Terapeuta;
-import com.acompanhamento.api.resource.dto.CadastroTerapeutaDTO;
-import com.acompanhamento.api.resource.dto.LoginDTO;
-import com.acompanhamento.api.resource.dto.RespostaAutenticacaoDTO;
+import com.acompanhamento.api.web.dto.CadastroTerapeutaDTO;
+import com.acompanhamento.api.web.dto.LoginDTO;
+import com.acompanhamento.api.web.dto.RespostaAutenticacaoDTO;
 import com.acompanhamento.api.security.jwt.JwtTokenUtil;
 import com.acompanhamento.api.security.jwt.JwtUserDetailsService;
 import com.acompanhamento.api.service.LoginService;
@@ -21,12 +21,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
-import static com.acompanhamento.api.domain.Perfil.RESPONSAVEL;
-import static com.acompanhamento.api.domain.Perfil.TERAPEUTA;
-import static com.acompanhamento.api.shared.Constantes.Mensagens.CADASTRO_SUCESSO;
-import static com.acompanhamento.api.shared.Constantes.MensagensDeErro.FALHA_AO_CADASTRAR;
-import static com.acompanhamento.api.shared.Constantes.MensagensDeErro.LOGIN_JA_EXISTENTE;
 
 @RestController
 @RequestMapping("/api/")

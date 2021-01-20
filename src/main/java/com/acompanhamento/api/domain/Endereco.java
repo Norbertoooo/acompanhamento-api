@@ -16,7 +16,6 @@ public class Endereco implements Serializable {
 
     private static final long serialVersionUID = 42L;
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,19 +31,7 @@ public class Endereco implements Serializable {
     private String detalhes;
 
     @JsonIgnore
-    @OneToOne( mappedBy = "endereco")
+    @OneToOne(mappedBy = "endereco")
     private Terapeuta terapeuta;
 
-    @Override
-    public String toString() {
-        return "Endereco{" +
-                "id=" + id +
-                ", cep=" + cep +
-                ", numero=" + numero +
-                ", rua='" + rua + '\'' +
-                ", bairro='" + bairro + '\'' +
-                ", detalhes='" + detalhes + '\'' +
-                ", terapeuta=" + terapeuta +
-                '}';
-    }
 }

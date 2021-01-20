@@ -16,7 +16,6 @@ public class Login implements Serializable {
 
     private static final long serialVersionUID = 42L;
 
-
     @Id
     @Column(name = "email", unique = true)
     private String email;
