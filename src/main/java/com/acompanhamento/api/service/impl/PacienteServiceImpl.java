@@ -1,11 +1,11 @@
 package com.acompanhamento.api.service.impl;
 
 import com.acompanhamento.api.domain.Paciente;
-import com.acompanhamento.api.domain.Perfil;
 import com.acompanhamento.api.repository.PacienteRepository;
 import com.acompanhamento.api.service.EmailService;
 import com.acompanhamento.api.service.PacienteService;
 import com.acompanhamento.api.service.TerapeutaService;
+import com.acompanhamento.api.web.exception.EmailException;
 import com.acompanhamento.api.web.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -56,7 +56,11 @@ public class PacienteServiceImpl implements PacienteService {
         });
         Paciente pacienteSalvo = pacienteRepository.save(paciente);
         paciente.getResponsaveis().forEach(responsavel -> {
-            emailService.enviar(responsavel.getLogin(), responsavel.getLogin().getEmail());
+            try {
+                emailService.enviarCredenciasResponsavel(responsavel.getLogin());
+            } catch (Exception e) {
+              throw new EmailException(e.getMessage());
+            }
         });
         return pacienteSalvo;
     }

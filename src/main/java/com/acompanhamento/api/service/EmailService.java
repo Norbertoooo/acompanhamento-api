@@ -4,6 +4,6 @@ import com.acompanhamento.api.domain.Login;
 
 public interface EmailService {
 
-    void enviar(Login login, String email);
+    void enviarCredenciasResponsavel(Login login);
 
 }

@@ -30,4 +30,14 @@ public class RestExceptionHandler {
         return exception;
     }
 
+    @ExceptionHandler(EmailException.class)
+    @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
+    public Exception emailException(EmailException ex, WebRequest request) {
+        Exception exception = new Exception();
+        exception.setMensagem(ex.getMessage());
+        exception.setStatus(HttpStatus.SERVICE_UNAVAILABLE.value());
+        exception.setUrl(request.getDescription(false).substring(4));
+        return exception;
+    }
+
 }

@@ -20,13 +20,14 @@ public class EmailServiceImpl implements EmailService {
     private JavaMailSenderImpl JavaMailSenderImpl;
 
     @Override
-    public void enviar(Login login, String email) {
+    public void enviarCredenciasResponsavel(Login login) {
 
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(email);
+        msg.setTo(login.getEmail());
         msg.setSubject("Rafa-Web - Credencias");
         msg.setText("Credencias para login: \nEmail: " + login.getEmail() + " \nSenha: " + SENHA_PADRAO_RESPONSAVEL);
-        log.info("Enviando email para: {}, com texto: {}", login.getEmail(), msg);
+        log.debug("Enviando email para: {}, com texto: \n {}", login.getEmail(), msg);
         JavaMailSenderImpl.send(msg);
+
     }
 }
