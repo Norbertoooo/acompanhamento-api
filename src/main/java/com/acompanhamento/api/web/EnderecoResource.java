@@ -23,8 +23,4 @@ public class EnderecoResource {
         return ResponseEntity.ok(enderecoService.buscarEnderecoPeloId(id));
     }
 
-    @GetMapping("/cpf/{cpf}")
-    public ResponseEntity<Endereco> buscarPorCpf(@PathVariable String cpf) {
-        return ResponseEntity.ok(enderecoService.buscarEnderecoPeloCpf(cpf));
-    }
 }

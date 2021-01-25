@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "responsavel")
 public class Responsavel implements Serializable {
 
     private static final long serialVersionUID = 42L;
@@ -29,17 +30,13 @@ public class Responsavel implements Serializable {
 
     private String parentesco;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco", referencedColumnName = "id")
     private Endereco endereco;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_login", referencedColumnName = "email")
     private Login login;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_paciente")
-    private Paciente paciente;
 
     public Responsavel(Login login) {
         this.login = login;

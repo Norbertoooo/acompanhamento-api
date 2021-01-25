@@ -19,8 +19,4 @@ public class EnderecoServiceImpl implements EnderecoService {
         return enderecoRepository.findById(id).orElseThrow();
     }
 
-    @Override
-    public Endereco buscarEnderecoPeloCpf(String cpf) {
-        return enderecoRepository.findByTerapeuta_Cpf(cpf).orElseThrow();
-    }
 }

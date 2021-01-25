@@ -3,7 +3,7 @@ package com.acompanhamento.api.shared;
 public class Constantes {
 
     public interface Variaveis {
-
+        String SENHA_PADRAO_RESPONSAVEL = "responsavel123";
     }
 
     public interface Mensagens {

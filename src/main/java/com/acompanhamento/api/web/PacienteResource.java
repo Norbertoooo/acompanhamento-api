@@ -1,7 +1,9 @@
 package com.acompanhamento.api.web;
 
 import com.acompanhamento.api.domain.Paciente;
+import com.acompanhamento.api.security.jwt.JwtTokenUtil;
 import com.acompanhamento.api.service.PacienteService;
+import com.acompanhamento.api.web.dto.PacienteDTO;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/pacientes/")
+@RequestMapping("/api/pacientes")
 @CrossOrigin(origins = "*")
 @Log4j2
 public class PacienteResource {
@@ -20,39 +26,51 @@ public class PacienteResource {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+
     public PacienteResource(PacienteService pacienteService) {
         this.pacienteService = pacienteService;
     }
 
-    @GetMapping("{email}/{page}/{count}")
-    public ResponseEntity<Page<Paciente>> listarPacientesPeloEmailDoTerapeuta(@PathVariable String email,
+    @GetMapping("/{page}/{count}")
+    public ResponseEntity<Page<Paciente>> listarPacientesPeloEmailDoTerapeuta(HttpServletRequest request,
                                                                               @PathVariable Integer page,
                                                                               @PathVariable Integer count) {
+        String email = (jwtTokenUtil.getEmailTerapeutaLogado(request));
+        log.info("Requisição para listar todos pacientes do terapeuta: {}", email);
         return ResponseEntity.ok(pacienteService.listarPacientesPeloEmailDoTerapeuta(email, page, count));
     }
 
-    @GetMapping("{nome}/{email}")
-    public ResponseEntity<Paciente> buscarPacientePeloNome(@PathVariable String nome, @PathVariable String email) throws Exception {
+    @GetMapping("/{nome}")
+    public ResponseEntity<Paciente> buscarPacientePeloNome(@PathVariable String nome, HttpServletRequest request) throws Exception {
+        String email = (jwtTokenUtil.getEmailTerapeutaLogado(request));
+        log.info("Requisição para listar paciente de nome: {}", nome);
         return ResponseEntity.ok(pacienteService.buscarPacientePeloNome(nome, email));
     }
 
-    @PostMapping("{email}")
-    public ResponseEntity<Paciente> adicionarPaciente(@PathVariable String email, @RequestBody Paciente paciente) throws Exception {
+    @PostMapping
+    public ResponseEntity<Paciente> adicionarPaciente(@RequestBody Paciente paciente, HttpServletRequest request) throws Exception {
+        String email = (jwtTokenUtil.getEmailTerapeutaLogado(request));
         log.info("Requisição para salvar paciente {} para o terapeuta do email {}", paciente, email);
         return ResponseEntity.ok(pacienteService.cadastrarPaciente(email, paciente));
     }
 
-    @DeleteMapping("{nome}/{email}")
-    public ResponseEntity<Void> removerPacientePeloNome(@PathVariable String nome, @PathVariable String email) {
-        log.info("Requisição para remover paciente {} para o terapeuta do email {}", nome, email);
+    @DeleteMapping("/{nome}")
+    public ResponseEntity<Void> removerPacientePeloNome(@PathVariable String nome, HttpServletRequest request) {
+        String email = (jwtTokenUtil.getEmailTerapeutaLogado(request));
+        log.info("Requisição para remover paciente pelo nome {} para o terapeuta {}", nome, email);
         pacienteService.removerPacientePeloNome(nome, email);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/id/{id}/{email}")
-    public ResponseEntity<Void> removerPacientePeloId(@PathVariable Long id, @PathVariable String email) {
-        log.info("Requisição para remover paciente {} para o terapeuta do email {}", id, email);
-        pacienteService.removerPacientePeloId(id, email);
+    @DeleteMapping
+    public ResponseEntity<Void> removerPacientesPeloId(HttpServletRequest request, @RequestBody List<PacienteDTO> pacientes) {
+        log.info("Requisição para remover paciente para o terapeuta do email");
+        String emailLogado = (jwtTokenUtil.getEmailTerapeutaLogado(request));
+        List<Long> pacientesId = new ArrayList<>();
+        pacientes.forEach(pacienteDTO -> pacientesId.add(pacienteDTO.getId()));
+        pacienteService.removerPacientesPeloId(pacientesId, emailLogado);
         return ResponseEntity.noContent().build();
     }
 

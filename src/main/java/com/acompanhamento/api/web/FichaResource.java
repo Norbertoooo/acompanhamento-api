@@ -22,10 +22,4 @@ public class FichaResource {
     @Autowired
     private ModelMapper modelMapper;
 
-    @GetMapping("{nome}")
-    public ResponseEntity<FichaDTO> listarPacientesPeloEmailDoTerapeuta(@PathVariable String nome) {
-        log.info("Requisição para listar ficha do paciente: {}", nome);
-        Ficha ficha = fichaRepository.findByPaciente_NomeCompleto(nome);
-        return ResponseEntity.ok(modelMapper.map(ficha, FichaDTO.class));
-    }
 }

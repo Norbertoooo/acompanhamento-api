@@ -8,5 +8,4 @@ import java.util.Optional;
 
 @Repository
 public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
-    Optional<Endereco> findByTerapeuta_Cpf(String terapeuta_cpf);
 }

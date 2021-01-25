@@ -1,7 +1,9 @@
 package com.acompanhamento.api.service;
 
+import com.acompanhamento.api.domain.Login;
+
 public interface EmailService {
 
-    void enviar(String messagem, String email);
+    void enviar(Login login, String email);
 
 }

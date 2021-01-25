@@ -34,7 +34,8 @@ public class Paciente implements Serializable {
     @JsonBackReference
     private Terapeuta terapeuta;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paciente", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_paciente")
     private List<Responsavel> responsaveis;
 
 }

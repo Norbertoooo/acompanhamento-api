@@ -3,15 +3,17 @@ package com.acompanhamento.api.service;
 import com.acompanhamento.api.domain.Paciente;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 public interface PacienteService {
 
-    Paciente buscarPacientePeloNome(String nome, String email) throws Exception;
+    Paciente buscarPacientePeloNome(String nome, String emailTerapeuta) throws Exception;
 
-    Page<Paciente> listarPacientesPeloEmailDoTerapeuta(String email, Integer page, Integer count);
+    Page<Paciente> listarPacientesPeloEmailDoTerapeuta(String emailTerapeuta, Integer page, Integer count);
 
-    Paciente cadastrarPaciente(String email, Paciente paciente) throws Exception;
+    Paciente cadastrarPaciente(String emailTerapeuta, Paciente paciente) throws Exception;
 
-    void removerPacientePeloNome(String nome, String email);
+    void removerPacientePeloNome(String nome, String emailTerapeuta);
 
-    void removerPacientePeloId(Long id, String email);
+    void removerPacientesPeloId(List<Long> pacientesId, String emailTerapeuta);
 }

@@ -53,15 +53,15 @@ public class LoginResource {
     }
 
     @PostMapping("autenticar")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginDTO authenticationRequest) throws Exception {
+    public ResponseEntity<?> autenticar(@RequestBody LoginDTO loginDTO) throws Exception {
 
-        authenticate(authenticationRequest.getEmail(), authenticationRequest.getSenha());
+        authenticate(loginDTO.getEmail(), loginDTO.getSenha());
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(loginDTO.getEmail());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new RespostaAutenticacaoDTO(authenticationRequest,token));
+        return ResponseEntity.ok(new RespostaAutenticacaoDTO(loginDTO,token));
     }
 
     @PostMapping("cadastrar")
