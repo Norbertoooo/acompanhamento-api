@@ -13,7 +13,5 @@ public interface PacienteService {
 
     Paciente cadastrarPaciente(String emailTerapeuta, Paciente paciente) throws Exception;
 
-    void removerPacientePeloNome(String nome, String emailTerapeuta);
-
     void removerPacientesPeloId(List<Long> pacientesId, String emailTerapeuta);
 }

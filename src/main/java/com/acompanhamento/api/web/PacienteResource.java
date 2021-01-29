@@ -56,14 +56,6 @@ public class PacienteResource {
         return ResponseEntity.ok(pacienteService.cadastrarPaciente(email, paciente));
     }
 
-    @DeleteMapping("/{nome}")
-    public ResponseEntity<Void> removerPacientePeloNome(@PathVariable String nome, HttpServletRequest request) {
-        String email = (jwtTokenUtil.getEmailTerapeutaLogado(request));
-        log.info("Requisição para remover paciente pelo nome {} para o terapeuta {}", nome, email);
-        pacienteService.removerPacientePeloNome(nome, email);
-        return ResponseEntity.noContent().build();
-    }
-
     @DeleteMapping
     public ResponseEntity<Void> removerPacientesPeloId(HttpServletRequest request, @RequestBody List<PacienteDTO> pacientes) {
         log.info("Requisição para remover paciente para o terapeuta do email");

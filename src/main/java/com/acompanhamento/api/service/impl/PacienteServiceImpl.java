@@ -66,11 +66,6 @@ public class PacienteServiceImpl implements PacienteService {
     }
 
     @Override
-    public void removerPacientePeloNome(String nome, String email) {
-        pacienteRepository.deleteByNomeCompletoAndTerapeuta_Login_Email(nome, email);
-    }
-
-    @Override
     @Transactional
     public void removerPacientesPeloId(List<Long> pacientesId, String email) {
         pacientesId.forEach(id -> pacienteRepository.deleteById(id));

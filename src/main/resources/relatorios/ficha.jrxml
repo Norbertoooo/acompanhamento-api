@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_de_acompanhamento" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="277" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7429b045-b388-4726-83de-230684dcddc0">
+	<property name="com.jaspersoft.studio.report.description" value="relatorioo de teste da rafa"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="c3788042-c780-4e9b-a0ca-72e95997a9d4"/>
+				<staticText>
+					<reportElement x="20" y="20" width="390" height="43" forecolor="#FFFFFF" uuid="bd8100a4-0cc0-4be4-a7ef-a2266f88628d"/>
+					<textElement>
+						<font size="24" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Relátorio de Acompanhamento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="20" y="63" width="190" height="20" forecolor="#FFFFFF" uuid="53f0710e-c2c7-4516-bf51-c64f1f59be5a"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relátorio de teste da rafa]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="3"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="598">
+			<line>
+				<reportElement x="-20" y="90" width="595" height="1" forecolor="#666666" uuid="82411bb9-4799-4566-adb9-4de383c2f2ca"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="110" height="30" uuid="32262992-145c-40e9-a6f5-a1b037cc3b9e"/>
+				<text><![CDATA[Nome do Paciente: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="110" height="30" uuid="6fb1e4b0-ff77-4408-b917-721d35410c46"/>
+				<text><![CDATA[Idade do Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="110" height="30" uuid="943be1ca-59e0-408b-8216-5f3b7672a59e"/>
+				<text><![CDATA[Nome do Responsável:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-20" y="230" width="595" height="1" forecolor="#666666" uuid="2b6a2a09-3717-4ad1-929a-67d25761827d"/>
+			</line>
+			<xyLineChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="310" width="200" height="200" uuid="97c7346b-77ce-4fe8-b75c-a96d6ee63052"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<xyDataset>
+					<dataset resetType="Report"/>
+					<xySeries>
+						<seriesExpression><![CDATA["SERIES 1"]]></seriesExpression>
+						<xValueExpression><![CDATA[0]]></xValueExpression>
+						<yValueExpression><![CDATA[0]]></yValueExpression>
+					</xySeries>
+				</xyDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</linePlot>
+			</xyLineChart>
+			<staticText>
+				<reportElement x="0" y="110" width="100" height="30" uuid="19c8e502-66d7-47a6-b4f0-8240d4538d01"/>
+				<text><![CDATA[Nome do terapeuta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="141" width="100" height="30" uuid="8eb85aea-399a-4326-9b1a-23d1198dcafe"/>
+				<text><![CDATA[CRP:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="170" width="100" height="30" uuid="08924a9f-bceb-4d2d-94f8-40a39b4da7a2"/>
+				<text><![CDATA[Observações:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="290" width="100" height="20" uuid="6c3e766a-a2c2-4008-bf25-fe1f8f4107e8"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Dados da consulta ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="405" y="290" width="100" height="20" uuid="bd701dd8-dd1f-4d1f-9f8c-330120462f4a"/>
+				<text><![CDATA[Dados da consulta]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="69d044cb-c7b7-4c24-addc-4ec4da81f4db"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="d5eaf0eb-3069-4e8d-918c-5d5c8c3e9721"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="e580f05c-9d5e-4541-8478-b3eb58d88be3"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="775cea19-6cc0-49ce-a5cc-be883ead99b9"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
