@@ -41,7 +41,7 @@ public class Terapeuta implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco", referencedColumnName = "id")
-    private Endereco endereco = new Endereco();
+    private Endereco endereco;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_login", referencedColumnName = "email", nullable = false)

@@ -4,7 +4,7 @@ import com.acompanhamento.api.domain.Terapeuta;
 import org.springframework.data.domain.Page;
 
 public interface TerapeutaService {
-    Terapeuta cadastrarLoginTerapeuta(Terapeuta terapeuta);
+    Terapeuta cadastrarTerapeuta(Terapeuta terapeuta);
 
     Terapeuta buscarTerapeutaPorNome(String nome) throws Exception;
 

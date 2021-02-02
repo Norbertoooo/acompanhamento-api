@@ -1,6 +1,5 @@
 package com.acompanhamento.api.web;
 
-import com.acompanhamento.api.domain.Login;
 import com.acompanhamento.api.domain.Terapeuta;
 import com.acompanhamento.api.web.dto.CadastroTerapeutaDTO;
 import com.acompanhamento.api.web.dto.LoginDTO;
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api")
 @CrossOrigin(origins = "*")
 @Log4j2
 public class LoginResource {
@@ -52,7 +51,7 @@ public class LoginResource {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping("autenticar")
+    @PostMapping("/autenticar")
     public ResponseEntity<?> autenticar(@RequestBody LoginDTO loginDTO) throws Exception {
 
         authenticate(loginDTO.getEmail(), loginDTO.getSenha());
@@ -64,12 +63,11 @@ public class LoginResource {
         return ResponseEntity.ok(new RespostaAutenticacaoDTO(loginDTO,token));
     }
 
-    @PostMapping("cadastrar")
-    public ResponseEntity<?> cadastrarTerapeuta(@Valid @RequestBody CadastroTerapeutaDTO cadastroTerapeutaDTO) throws Exception {
+    @PostMapping("/cadastrar")
+    public ResponseEntity<Terapeuta> cadastrarTerapeuta(@Valid @RequestBody CadastroTerapeutaDTO cadastroTerapeutaDTO) throws Exception {
         log.info("Requisição para cadastrar novo terapeuta: {}", cadastroTerapeutaDTO);
-        Login login = modelMapper.map(cadastroTerapeutaDTO.getLogin(), Login.class);
         Terapeuta terapeuta = modelMapper.map(cadastroTerapeutaDTO, Terapeuta.class);
-        return ResponseEntity.ok(terapeutaService.cadastrarLoginTerapeuta(terapeuta));
+        return ResponseEntity.ok(terapeutaService.cadastrarTerapeuta(terapeuta));
     }
 
     private void authenticate(String username, String password) throws Exception {

@@ -25,7 +25,7 @@ public class TerapeutaServiceImpl implements TerapeutaService {
     }
 
     @Override
-    public Terapeuta cadastrarLoginTerapeuta(Terapeuta terapeuta) {
+    public Terapeuta cadastrarTerapeuta(Terapeuta terapeuta) {
         terapeuta.getLogin().setPerfil(TERAPEUTA);
         terapeuta.getLogin().setSenha(passwordEncoder.encode(terapeuta.getLogin().getSenha()));
         return terapeutaRepository.save(terapeuta);

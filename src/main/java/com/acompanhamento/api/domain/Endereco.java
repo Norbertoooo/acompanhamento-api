@@ -1,11 +1,13 @@
 package com.acompanhamento.api.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
@@ -28,10 +30,10 @@ public class Endereco implements Serializable {
 
     private String bairro;
 
-    private String detalhes;
+    private String complemento;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "endereco")
-    private Terapeuta terapeuta;
+    private String cidade;
+
+    private String estado;
 
 }
