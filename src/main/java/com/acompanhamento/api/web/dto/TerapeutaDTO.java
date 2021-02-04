@@ -30,4 +30,6 @@ public class TerapeutaDTO {
     private String loginEmail;
 
     private Long enderecoId;
+
+    private EnderecoDTO endereco;
 }

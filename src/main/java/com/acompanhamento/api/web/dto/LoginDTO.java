@@ -1,5 +1,6 @@
 package com.acompanhamento.api.web.dto;
 
+import com.acompanhamento.api.domain.Perfil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,5 +24,7 @@ public class LoginDTO {
     @NotNull
     @Length(min = 6, max = 12)
     private String senha;
+
+    private Perfil perfil;
 
 }
