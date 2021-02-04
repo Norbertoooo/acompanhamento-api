@@ -1,11 +1,19 @@
 pipeline {
     agent any
 
+   tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk11'
+    }
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
-                mvn compile
+                sh 'mvn -Dmaven.test.failure.ignore=true install'
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml'
+                }
             }
         }
         stage('Test') {
