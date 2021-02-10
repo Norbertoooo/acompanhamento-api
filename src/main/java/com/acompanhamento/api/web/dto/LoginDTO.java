@@ -27,4 +27,8 @@ public class LoginDTO {
 
     private Perfil perfil;
 
+    public LoginDTO(@Email @NotBlank @NotNull String email, Perfil perfil) {
+        this.email = email;
+        this.perfil = perfil;
+    }
 }

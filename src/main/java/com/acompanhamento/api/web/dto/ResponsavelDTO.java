@@ -18,4 +18,14 @@ public class ResponsavelDTO {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date dataNascimento;
+
+    private Long telefone;
+
+    private String cpf;
+
+    private String parentesco;
+
+    private EnderecoDTO endereco;
+
+    private LoginDTO login;
 }

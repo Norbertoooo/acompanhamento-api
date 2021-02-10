@@ -63,7 +63,7 @@ public class JwtTokenUtil implements Serializable {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    public String getEmailTerapeutaLogado(HttpServletRequest request) {
+    public String getEmailLogado(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
         return getUsernameFromToken(token);
     }

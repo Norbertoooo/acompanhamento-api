@@ -4,6 +4,7 @@ import com.acompanhamento.api.domain.Login;
 import com.acompanhamento.api.domain.Responsavel;
 import com.acompanhamento.api.repository.ResponsavelRepository;
 import com.acompanhamento.api.service.ResponsavelService;
+import com.acompanhamento.api.web.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,5 +33,10 @@ public class ResponsavelServiceImpl implements ResponsavelService {
     @Override
     public Responsavel buscarResponsavelPeloNome(String nome) throws Exception {
         return responsavelRepository.findByNomeCompleto(nome).orElseThrow( () -> new Exception(RESPONSAVEL_NAO_ENCONTRADO));
+    }
+
+    @Override
+    public Responsavel buscarResponsavelPeloEmail(String email) {
+        return responsavelRepository.findByLoginEmail(email).orElseThrow( () -> new ResourceNotFoundException("Email não encontrado"));
     }
 }

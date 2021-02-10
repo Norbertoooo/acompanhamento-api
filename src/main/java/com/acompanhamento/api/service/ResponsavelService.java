@@ -9,4 +9,5 @@ public interface ResponsavelService {
     Responsavel cadastrarLoginResponsavel(Login login);
     List<Responsavel> listarTodosResponsaveis();
     Responsavel buscarResponsavelPeloNome(String nome) throws Exception;
+    Responsavel buscarResponsavelPeloEmail(String email);
 }

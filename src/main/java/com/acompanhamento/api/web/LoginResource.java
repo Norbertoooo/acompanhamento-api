@@ -1,5 +1,7 @@
 package com.acompanhamento.api.web;
 
+import com.acompanhamento.api.domain.Login;
+import com.acompanhamento.api.domain.Perfil;
 import com.acompanhamento.api.domain.Terapeuta;
 import com.acompanhamento.api.web.dto.CadastroTerapeutaDTO;
 import com.acompanhamento.api.web.dto.LoginDTO;
@@ -20,6 +22,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -60,7 +65,9 @@ public class LoginResource {
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new RespostaAutenticacaoDTO(loginDTO,token));
+        Optional<Login> login = loginService.findByEmail(userDetails.getUsername());
+
+        return ResponseEntity.ok(new RespostaAutenticacaoDTO(new LoginDTO(loginDTO.getEmail(), null, login.get().getPerfil()),token));
     }
 
     @PostMapping("/cadastrar")

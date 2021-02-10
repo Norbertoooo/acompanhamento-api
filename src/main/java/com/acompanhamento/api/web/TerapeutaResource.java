@@ -33,7 +33,7 @@ public class TerapeutaResource {
 
     @GetMapping
     public TerapeutaDTO buscarTerapeutaPorEmail(HttpServletRequest request) throws Exception {
-        String email = (jwtTokenUtil.getEmailTerapeutaLogado(request));
+        String email = (jwtTokenUtil.getEmailLogado(request));
         log.info("Requisição para buscar terapeuta pelo email de login: {}", email);
         return modelMapper.map(terapeutaService.buscarTerapeutaPorEmail(email), TerapeutaDTO.class);
     }
