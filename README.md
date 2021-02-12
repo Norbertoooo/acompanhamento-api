@@ -8,3 +8,4 @@ jdk 11
     spring-data-jpa
     string-validation
     spring-mail
+    spring-fox
