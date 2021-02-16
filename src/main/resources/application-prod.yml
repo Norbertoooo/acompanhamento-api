@@ -1,10 +1,10 @@
 spring:
   datasource:
-    username: rafa
-    password:
+    username: uhrarxrtwzelbg
+    password: 5e3c7186ede1aa8070f781707a0002b498a50c331fd6f54b500e3de1ea93ee2f
     driver-class-name: org.postgresql.Driver
     platform: org.hibernate.dialect.PostgreSQLDialect
-    url: jdbc:postgresql://
+    url: jdbc:postgres://uhrarxrtwzelbg:5e3c7186ede1aa8070f781707a0002b498a50c331fd6f54b500e3de1ea93ee2f@ec2-54-145-249-177.compute-1.amazonaws.com:5432/dcrsp95fgeqmkv
   jpa:
     database: postgresql
   flyway:
