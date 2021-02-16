@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,12 @@ public class PacienteResource {
 
     public PacienteResource(PacienteService pacienteService) {
         this.pacienteService = pacienteService;
+    }
+
+    @GetMapping("/admin/{page}/{count}")
+    public ResponseEntity<Page<Paciente>> listarPacientes(@PathVariable Integer page, @PathVariable Integer count) {
+        log.info("Requisição para listar todos pacientes");
+        return ResponseEntity.ok(pacienteService.listarPacientes(page, count));
     }
 
     @GetMapping("/{page}/{count}")

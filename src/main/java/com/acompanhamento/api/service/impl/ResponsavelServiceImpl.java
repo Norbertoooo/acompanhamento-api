@@ -5,6 +5,9 @@ import com.acompanhamento.api.domain.Responsavel;
 import com.acompanhamento.api.repository.ResponsavelRepository;
 import com.acompanhamento.api.service.ResponsavelService;
 import com.acompanhamento.api.web.exception.ResourceNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +29,9 @@ public class ResponsavelServiceImpl implements ResponsavelService {
     }
 
     @Override
-    public List<Responsavel> listarTodosResponsaveis() {
-        return responsavelRepository.findAll();
+    public Page<Responsavel> listarTodosResponsaveis(Integer page, Integer count) {
+        Pageable pages = PageRequest.of(page, count);
+        return responsavelRepository.findAll(pages);
     }
 
     @Override

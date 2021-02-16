@@ -40,4 +40,14 @@ public class RestExceptionHandler {
         return exception;
     }
 
+    @ExceptionHandler(java.lang.Exception.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public Exception internalServerErrorException(java.lang.Exception ex, WebRequest request) {
+        Exception exception = new Exception();
+        exception.setMensagem(ex.getMessage());
+        exception.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        exception.setUrl(request.getDescription(false).substring(4));
+        return exception;
+    }
+
 }

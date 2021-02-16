@@ -18,4 +18,8 @@ public class Constantes {
         String RESPONSAVEL_NAO_ENCONTRADO = "Responsável não encontrado pelo nome informado";
 
     }
+
+    public interface Queries {
+        String LISTAR_PACIENTES_RESPONSAVEL = "select * from paciente where id = (select r.id_paciente from responsavel r where r.id_login = ?1)";
+    }
 }
