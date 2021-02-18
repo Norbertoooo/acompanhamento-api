@@ -1,17 +1,19 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:teste
-    username: teste
-    password:
-    driver-class-name: org.h2.Driver
-    platform: org.hibernate.dialect.H2Dialect
+    username: rafa
+    password: rafa
+    driver-class-name: org.postgresql.Driver
+    platform: org.hibernate.dialect.PostgreSQLDialect
+    url: jdbc:postgresql://localhost:5432/rafa
   jpa:
-    open-in-view: true
-    show-sql: true
-  devtools:
-    add-properties: true
+    open-in-view: false
+    database: postgresql
   flyway:
-    enabled: false
+    enabled: true
+  h2:
+    console:
+      enabled: false
+
 logging:
   level:
     web: debug

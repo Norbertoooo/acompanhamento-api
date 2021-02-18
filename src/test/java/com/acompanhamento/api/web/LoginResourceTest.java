@@ -1,29 +1,40 @@
 package com.acompanhamento.api.web;
 
+import com.acompanhamento.api.domain.Endereco;
 import com.acompanhamento.api.domain.Login;
+import com.acompanhamento.api.domain.Terapeuta;
+import com.acompanhamento.api.security.jwt.JwtAuthenticationEntryPoint;
+import com.acompanhamento.api.security.jwt.JwtTokenUtil;
+import com.acompanhamento.api.security.jwt.JwtUserDetailsService;
+import com.acompanhamento.api.service.EnderecoService;
 import com.acompanhamento.api.service.LoginService;
+import com.acompanhamento.api.service.PacienteService;
+import com.acompanhamento.api.service.TerapeutaService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.acompanhamento.api.domain.Perfil.RESPONSAVEL;
-import static com.acompanhamento.api.shared.Constantes.Mensagens.CADASTRO_SUCESSO;
+import java.util.Date;
+
+import static com.acompanhamento.api.domain.Perfil.TERAPEUTA;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@AutoConfigureMockMvc
-@SpringBootTest
-@ActiveProfiles("dev")
+
+@ActiveProfiles("test")
+@WebMvcTest(controllers = LoginResource.class)
+@Log4j2
 public class LoginResourceTest {
 
     @Autowired
@@ -35,18 +46,45 @@ public class LoginResourceTest {
     @MockBean
     private LoginService loginService;
 
-    @Test
-    void deveRetornarSucessoAoCadastrarNovoUsuario() throws Exception {
-        Login login = new Login("teste@gmail.com", "teste123", RESPONSAVEL);
+    @MockBean
+    private EnderecoService enderecoService;
 
-        when(loginService.save(login)).thenReturn(any());
+    @MockBean
+    private ModelMapper modelMapper;
+
+    @MockBean
+    private TerapeutaService terapeutaService;
+
+    @MockBean
+    private PacienteService pacienteService;
+
+    @MockBean
+    private JwtUserDetailsService jwtUserDetailsService;
+
+    @MockBean
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
+    @MockBean
+    private JwtTokenUtil jwtTokenUtil;
+
+    @Test
+    void deveRetornarSucessoAoCadastrarTerapeuta() throws Exception {
+        Terapeuta terapeuta = new Terapeuta();
+        terapeuta.setNomeCompleto("teste");
+        terapeuta.setCrfa(12323232L);
+        terapeuta.setFormacao("dasdsadasd");
+        terapeuta.setDataNascimento(new Date());
+        terapeuta.setCpf("43243234324");
+        terapeuta.setTelefone(43432432L);
+        terapeuta.setEndereco(new Endereco());
+        terapeuta.setEspecialidade("dsadasdas");
+        terapeuta.setLogin(new Login("teste@gmail.com", "123456", TERAPEUTA));
+        when(terapeutaService.cadastrarTerapeuta(terapeuta)).thenReturn(eq(terapeuta), any(Terapeuta.class));
 
         mockMvc.perform(post("/api/cadastrar")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(login)))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(content().contentType(MediaType.parseMediaType("text/plain;charset=UTF-8")))
-                .andExpect(content().string(CADASTRO_SUCESSO));
+                .content(objectMapper.writeValueAsString(terapeuta)))
+                .andExpect(status().is2xxSuccessful());
     }
 
     private String tojson(Object object) throws JsonProcessingException {

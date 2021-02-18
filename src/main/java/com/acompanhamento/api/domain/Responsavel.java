@@ -20,17 +20,23 @@ public class Responsavel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "nome_completo")
     private String nomeCompleto;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @Column(name = "data_nascimento")
     private Date dataNascimento;
 
+    @Column(name = "telefone")
     private Long telefone;
 
+    @Column(name = "cpf")
     private String cpf;
 
+    @Column(name = "parentesco")
     private String parentesco;
 
     @OneToOne(cascade = CascadeType.ALL)

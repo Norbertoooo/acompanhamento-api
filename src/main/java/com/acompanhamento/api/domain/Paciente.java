@@ -26,10 +26,12 @@ public class Paciente implements Serializable {
     private Long id;
 
     @NotBlank
+    @Column(name = "nome_completo")
     private String nomeCompleto;
 
     @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @Column(name = "data_nascimento")
     private Date dataNascimento;
 
     @OneToOne(cascade = CascadeType.ALL)
