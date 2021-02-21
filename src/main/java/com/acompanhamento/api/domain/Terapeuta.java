@@ -55,7 +55,7 @@ public class Terapeuta implements Serializable {
     @JoinColumn(name = "id_login", referencedColumnName = "email", nullable = false)
     private Login login;
 
-    @OneToMany(mappedBy = "terapeuta", orphanRemoval = true)
+    @OneToMany(mappedBy = "terapeuta")
     @JsonIgnore
     private List<Paciente> pacientes;
 

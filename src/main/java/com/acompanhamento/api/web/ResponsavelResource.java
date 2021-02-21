@@ -21,17 +21,20 @@ import java.util.List;
 @Log4j2
 public class ResponsavelResource {
 
-    @Autowired
-    private ResponsavelService responsavelService;
+    private final ResponsavelService responsavelService;
 
-    @Autowired
-    private PacienteService pacienteService;
+    private final PacienteService pacienteService;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private final JwtTokenUtil jwtTokenUtil;
+
+    public ResponsavelResource(ResponsavelService responsavelService, PacienteService pacienteService, ModelMapper modelMapper, JwtTokenUtil jwtTokenUtil) {
+        this.responsavelService = responsavelService;
+        this.pacienteService = pacienteService;
+        this.modelMapper = modelMapper;
+        this.jwtTokenUtil = jwtTokenUtil;
+    }
 
     @GetMapping("/{page}/{count}")
     public Page<Responsavel> listarResponsaveis(HttpServletRequest request, @PathVariable Integer page, @PathVariable Integer count) {

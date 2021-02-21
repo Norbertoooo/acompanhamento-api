@@ -21,14 +21,14 @@ public class TerapeutaResource {
 
     private final TerapeutaService terapeutaService;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private final JwtTokenUtil jwtTokenUtil;
 
-    public TerapeutaResource(TerapeutaService terapeutaService) {
+    public TerapeutaResource(TerapeutaService terapeutaService, ModelMapper modelMapper, JwtTokenUtil jwtTokenUtil) {
         this.terapeutaService = terapeutaService;
+        this.modelMapper = modelMapper;
+        this.jwtTokenUtil = jwtTokenUtil;
     }
 
     @GetMapping
@@ -38,10 +38,12 @@ public class TerapeutaResource {
         return modelMapper.map(terapeutaService.buscarTerapeutaPorEmail(email), TerapeutaDTO.class);
     }
 
-    @PutMapping("/{email}")
-    public Terapeuta atualizarTerapeuta(@PathVariable String email, @RequestBody Terapeuta terapeuta) throws Exception {
+    @PutMapping
+    public ResponseEntity<Terapeuta> atualizarTerapeuta(HttpServletRequest request, @RequestBody TerapeutaDTO terapeutaDTO) throws Exception {
+        String email = (jwtTokenUtil.getEmailLogado(request));
         log.info("Requesição para atualizar terapeuta pelo email: {}", email);
-        return terapeutaService.atualizarInformacoes(terapeuta, email);
+        Terapeuta terapeuta = terapeutaService.atualizarInformacoes(modelMapper.map(terapeutaDTO, Terapeuta.class), email);
+        return ResponseEntity.ok(terapeuta);
     }
 
     @GetMapping("/{page}/{count}")

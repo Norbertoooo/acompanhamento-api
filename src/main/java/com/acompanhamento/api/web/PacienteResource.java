@@ -23,14 +23,14 @@ public class PacienteResource {
 
     private final PacienteService pacienteService;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private final JwtTokenUtil jwtTokenUtil;
 
-    public PacienteResource(PacienteService pacienteService) {
+    public PacienteResource(PacienteService pacienteService, ModelMapper modelMapper, JwtTokenUtil jwtTokenUtil) {
         this.pacienteService = pacienteService;
+        this.modelMapper = modelMapper;
+        this.jwtTokenUtil = jwtTokenUtil;
     }
 
     @GetMapping("/admin/{page}/{count}")

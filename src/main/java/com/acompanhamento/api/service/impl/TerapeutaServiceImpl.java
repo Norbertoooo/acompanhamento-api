@@ -52,9 +52,14 @@ public class TerapeutaServiceImpl implements TerapeutaService {
     @Override
     public Terapeuta atualizarInformacoes(Terapeuta terapeutaAlterado, String email) {
         Terapeuta terapeuta = buscarTerapeutaPorEmail(email);
-        terapeuta.setNomeCompleto(terapeutaAlterado.getNomeCompleto());
-        terapeuta.setCrfa(terapeutaAlterado.getCrfa());
         terapeuta.setCpf(terapeutaAlterado.getCpf());
+        terapeuta.setCrfa(terapeutaAlterado.getCrfa());
+        terapeuta.setNomeCompleto(terapeutaAlterado.getNomeCompleto());
+        terapeuta.setTelefone(terapeutaAlterado.getTelefone());
+        terapeuta.setFormacao(terapeutaAlterado.getFormacao());
+        terapeuta.setEspecialidade(terapeutaAlterado.getEspecialidade());
+        terapeuta.setEndereco(terapeutaAlterado.getEndereco());
+        terapeuta.setDataNascimento(terapeutaAlterado.getDataNascimento());
         return terapeutaRepository.save(terapeuta);
     }
 

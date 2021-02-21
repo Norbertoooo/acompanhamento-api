@@ -3,6 +3,7 @@ package com.acompanhamento.api.service.impl;
 import com.acompanhamento.api.domain.Login;
 import com.acompanhamento.api.repository.LoginRepository;
 import com.acompanhamento.api.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +14,11 @@ import static com.acompanhamento.api.shared.Constantes.MensagensDeErro.LOGIN_JA_
 @Service
 public class LoginServiceImpl implements LoginService {
 
-    private final LoginRepository loginRepository;
+    @Autowired
+    private LoginRepository loginRepository;
 
-    private final PasswordEncoder bcryptEncoder;
-
-    public LoginServiceImpl(LoginRepository loginRepository, PasswordEncoder bcryptEncoder) {
-        this.loginRepository = loginRepository;
-        this.bcryptEncoder = bcryptEncoder;
-    }
+    @Autowired
+    private PasswordEncoder bcryptEncoder;
 
     @Override
     public Login save(Login login) {

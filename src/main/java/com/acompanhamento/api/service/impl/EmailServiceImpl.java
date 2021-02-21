@@ -16,8 +16,11 @@ import static com.acompanhamento.api.shared.Constantes.Variaveis.SENHA_PADRAO_RE
 @Log4j2
 public class EmailServiceImpl implements EmailService {
 
-    @Autowired
-    private JavaMailSenderImpl JavaMailSenderImpl;
+    private final JavaMailSenderImpl JavaMailSenderImpl;
+
+    public EmailServiceImpl(JavaMailSenderImpl javaMailSenderImpl) {
+        JavaMailSenderImpl = javaMailSenderImpl;
+    }
 
     @Override
     public void enviarCredenciasResponsavel(Login login) {

@@ -10,8 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 import static com.acompanhamento.api.shared.Constantes.MensagensDeErro.RESPONSAVEL_NAO_ENCONTRADO;
 
 @Service
@@ -36,11 +34,11 @@ public class ResponsavelServiceImpl implements ResponsavelService {
 
     @Override
     public Responsavel buscarResponsavelPeloNome(String nome) throws Exception {
-        return responsavelRepository.findByNomeCompleto(nome).orElseThrow( () -> new Exception(RESPONSAVEL_NAO_ENCONTRADO));
+        return responsavelRepository.findByNomeCompleto(nome).orElseThrow(() -> new Exception(RESPONSAVEL_NAO_ENCONTRADO));
     }
 
     @Override
     public Responsavel buscarResponsavelPeloEmail(String email) {
-        return responsavelRepository.findByLoginEmail(email).orElseThrow( () -> new ResourceNotFoundException("Email não encontrado"));
+        return responsavelRepository.findByLoginEmail(email).orElseThrow(() -> new ResourceNotFoundException("Email não encontrado"));
     }
 }

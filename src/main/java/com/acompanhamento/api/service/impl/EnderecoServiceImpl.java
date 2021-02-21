@@ -3,6 +3,7 @@ package com.acompanhamento.api.service.impl;
 import com.acompanhamento.api.domain.Endereco;
 import com.acompanhamento.api.repository.EnderecoRepository;
 import com.acompanhamento.api.service.EnderecoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

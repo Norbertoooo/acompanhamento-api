@@ -17,8 +17,11 @@ import java.util.HashMap;
 @Log4j2
 public class FichaResource {
 
-    @Autowired
-    private ResourceLoader resourceLoader;
+    private final ResourceLoader resourceLoader;
+
+    public FichaResource(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
 
     @GetMapping("/exportar/{id_paciente}")
     public void exportarFicha(HttpServletResponse response, @PathVariable String id_paciente) throws IOException, JRException {

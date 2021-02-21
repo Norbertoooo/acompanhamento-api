@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/enderecos/")
+@RequestMapping("/api/enderecos")
 @CrossOrigin(origins = "*")
 @Log4j2
 public class EnderecoResource {
@@ -18,7 +18,7 @@ public class EnderecoResource {
         this.enderecoService = enderecoService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{/id}")
     public ResponseEntity<Endereco> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(enderecoService.buscarEnderecoPeloId(id));
     }
